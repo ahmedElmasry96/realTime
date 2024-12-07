@@ -1,5 +1,6 @@
 <?php
 
+use App\Broadcasting\NewUserRegisteredChannel;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
-});
+Broadcast::channel('new_user_registered_channel', NewUserRegisteredChannel::class);
+
+Broadcast::channel('online_admins_channel', function($admin) {
+    if($admin->type == 'super_admin')
+    return $admin;
+}, ['guards' => ['admin']]);
+
+

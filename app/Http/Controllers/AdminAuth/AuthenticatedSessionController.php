@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\AdminAuth;
 
+use App\Events\LoginAdminEvent;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,7 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate('admin');
 
+        LoginAdminEvent::dispatch();
         $request->session()->regenerate();
 
         return \to_route('admin.index');

@@ -5,10 +5,10 @@
 
     <ul class="nav">
 
-        <li class="nav-item nav-notif">
+        <li class="nav-item nav-notif notificationIcon">
             <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-notif">
                 <span class="fe fe-bell fe-16"></span>
-                <span class="dot dot-md bg-success"></span>
+                <span class="dot dot-md text-danger" id="notificationIconCounter">{{count(Auth::guard('admin')->user()->unreadnotifications) > 0 ? count(Auth::guard('admin')->user()->unreadnotifications) : ''}}</span>
             </a>
         </li>
 
